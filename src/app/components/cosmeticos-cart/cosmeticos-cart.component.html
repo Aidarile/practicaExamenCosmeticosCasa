@@ -1,0 +1,23 @@
+<div class="container mt-10"> 
+    <div class="row mt-5 justify-content-center">
+        
+        <!-- Recorre los cosméticos -->
+        @for (cosm of cosmeticos; track cosm._id) {
+            <div class="col-md-8"> 
+                <h2> {{cosm.name}} </h2>
+                <p class="text-end text-success"> 
+                    {{cosm.price | currency: 'EUR'}} 
+                </p> 
+            </div>
+        }
+
+        <!-- TOTAL -->
+        <div class="col-md-8"> 
+            <h2> TOTAL </h2> 
+            <p class="text-end text-success"> 
+                {{cosmeticoPrice | currency: 'EUR'}} 
+            </p> 
+        </div> 
+
+    </div> 
+</div>

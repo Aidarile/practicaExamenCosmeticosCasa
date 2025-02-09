@@ -1,0 +1,78 @@
+@defer (when cosmeticoList) {
+    
+    <div class="row">
+        <div class="row mt-2 text-center">
+            <div class="col-md-6 ">
+                 <div class="input-group flex-nonwrap">
+                <span class="input-group-text" id="addon-wrapping">
+                    <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+                </span>
+                <input type="search" class="form-control" placeholder="Search" aria-label="search" aria-describedby="addon-wrapping"
+                (input)="buscar($event)">
+           
+            </div>
+            </div>
+        <div class="col-md-6 text-center d-flex justify-content-center">
+           <ngb-pagination
+           [(page)]="currentPage"
+           [pageSize]=8
+           [collectionSize]="cosmeticos.cosmeticos.info.total"
+           [ellipses]="true"
+           [maxSize]="8"
+           [rotate]="true"
+           (pageChange)="loadData()"
+           ></ngb-pagination>
+            
+        </div>
+        </div>
+       
+        @for (cosm of cosmeticoList; track cosm._id) {
+            <div class="col-md-3" >
+                <div class="card shadow-sm my-2" >
+                    <img [src]="cosm.image" alt="{{cosm.name}}" class="card-img-top" [routerLink]="'/cosmeticos-detail/'+cosm._id">
+                  
+                  <div class="card-body">
+                    <p class="card-title">{{cosm.name}}</p>
+                    <p class="card-text">{{cosm.brand}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button"  [routerLink]="'/cosmeticos/edit/' + cosm._id" class="btn btn-sm btn-outline-info">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </button>
+                        <!--LAS DOS ULTIMAS CLASES SON PARA QUE FUNCIONE EL MODAL-->
+                        <button type="button" class="btn btn-sm btn-outline-danger">
+                            <fa-icon [icon]="faTrashCan"></fa-icon>
+                        </button>
+
+                        <button type="button" (click)="addToCart(cosm)" 
+                            class="btn btn-sm btn-outline-secondary">
+                            <fa-icon [icon]="faCartShopping"></fa-icon> 
+                        </button>
+
+                      </div>
+                      <small class="text-body-secondary">
+                        <span class="text-primary">{{cosm.price | currency: 'EUR'}}</span>
+                      </small>
+                      <small class="text-body-secondary">
+                      <span class="text-secondary">{{cosm.type}}</span>
+                    </small>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+    @if(toastShow){ 
+            <!-- PARA USARLO IMPORTAR MANUALMENTE: import { NgbToast } from "@ng-bootstrap/ng-bootstrap" -->
+            <ngb-toast class="toast-container position-fixed top-0 end-0 {{toast.color}}">{{toast.message}}
+            </ngb-toast>
+        }
+
+} @placeholder() {
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+</div>
+}

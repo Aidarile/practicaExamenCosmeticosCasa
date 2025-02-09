@@ -1,0 +1,136 @@
+<div class="container">
+    @defer (when load) {
+      <div class="row mt-5">
+        <div class="col-md-4 offset-md-2">
+
+          <!-- FORMULARIO -->
+          <h3>{{ edit ? 'EDIT COSMETICO' : 'NEW COSMETICO' }}</h3>
+          <form [formGroup]="formCosmetico">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                placeholder="name"/>
+              <label for="title">Name</label>
+              @if (formCosmetico.get('name')?.invalid && (formCosmetico.get('name')?.dirty || formCosmetico.get('name')?.touched)) {
+                <div class="alert alert-danger">
+                  @if (formCosmetico.get('name')?.errors?.['required']) {
+                    <p>Name is required</p>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="string"
+                class="form-control"
+                id="image"
+                formControlName="image"
+                placeholder="image"/>
+              <label for="image">Image</label>
+              @if (formCosmetico.get('image')?.invalid && (formCosmetico.get('image')?.dirty || formCosmetico.get('image')?.touched)) {
+                <div class="alert alert-danger">
+                  @if (formCosmetico.get('image')?.errors?.['required']) {
+                    <p>Image is required</p>
+                  }
+                </div>
+              }
+            </div>
+  
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="type"
+                formControlName="type"
+                placeholder="type"/>
+              <label for="type">Type</label>
+              @if (formCosmetico.get('type')?.invalid && (formCosmetico.get('type')?.dirty || formCosmetico.get('type')?.touched)) {
+                <div class="alert alert-danger">
+                  @if (formCosmetico.get('type')?.errors?.['required']) {
+                    <p>Type is required</p>
+                  }
+                </div>
+              }
+            </div>
+  
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="brand"
+                formControlName="brand"
+                placeholder="brand"/>
+              <label for="brand">Brand</label>
+              @if (formCosmetico.get('brand')?.invalid && (formCosmetico.get('brand')?.dirty || formCosmetico.get('brand')?.touched)) {
+                <div class="alert alert-danger">
+                  @if (formCosmetico.get('brand')?.errors?.['required']) {
+                    <p>Brand is required</p>
+                  }
+                </div>
+              }
+            </div>
+  
+            <div class="form-floating mb-3">
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                formControlName="price"
+                placeholder="price"/>
+              <label for="price">price</label>
+              @if (formCosmetico.get('price')?.invalid && (formCosmetico.get('price')?.dirty || formCosmetico.get('price')?.touched)) {
+                <div class="alert alert-danger">
+                  @if (formCosmetico.get('price')?.errors?.['required']) {
+                    <p>price is required</p>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button class="btn btn-outline-success" (click)="onSubmit()">
+                {{ edit ? 'EDIT' : 'ADD' }}
+              </button>
+            </div>
+          </form>
+        </div>
+  
+        <div class="col-md-4 col-lg-3">
+          <div class="card shadow-sm">
+            <img
+              [src]="formCosmetico.get('image')?.value || '/images/notfound.jpg'"
+              alt="{{ formCosmetico.get('name')?.value }}"
+              class="card-img-top"
+            />
+            <div class="card-body">
+              <p class="card-name text-secondary">
+                {{ formCosmetico.get('name')?.value || 'name' }}
+              </p>
+              <p class="badge rounded-pill bg-primary">
+                {{ formCosmetico.get('type')?.value || 'type' }}
+              </p>
+              <p class="card-text">
+                {{ formCosmetico.get('brand')?.value || 'brand' }}
+              </p>
+  
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-body-secondary">{{
+                    formCosmetico.get('price')?.value
+                }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    } @placeholder {
+      <div class="d-flex mt-5 justify-content-center">
+        <div class="spinner-border text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    }
+  </div>
