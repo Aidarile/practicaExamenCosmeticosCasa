@@ -9,12 +9,15 @@ export class FormValidators {
         }
     }
 
-
     static allowedData(files: RegExp): ValidatorFn {
         return (ControlContainer: AbstractControl): ValidationErrors | null => {
             const allowed = files.test(ControlContainer.value)
             return allowed? null : {allowedFiles: true}
         }
-
     }
+
+    static forbiddenNameValidator(nameRe: RegExp): ValidatorFn{
+        return(control: AbstractControl): ValidationErrors | null => {
+         const forbidden = nameRe.test(control.value);
+         return forbidden ? {forbiddenName: true} : null }}
 }

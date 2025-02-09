@@ -19,6 +19,15 @@
                   @if (formCosmetico.get('name')?.errors?.['required']) {
                     <p>Name is required</p>
                   }
+                  @if(formCosmetico.get('name')?.errors?.['minlength']){
+                    <p>Name minimun length is 2 characters</p>
+                }
+                @if(formCosmetico.get('name')?.errors?.['notOnlyWhiteSpace']){
+                  <p>Name can not be in white space</p>
+                }
+              @if(formCosmetico.get('name')?.errors?.['forbiddenName']){
+                <p>Name can not be pito or polla</p>
+                }
                 </div>
               }
             </div>
@@ -35,6 +44,9 @@
                 <div class="alert alert-danger">
                   @if (formCosmetico.get('image')?.errors?.['required']) {
                     <p>Image is required</p>
+                  }
+                  @if (formCosmetico.get('image')?.errors?.['allowedFiles']) {
+                    <p>Image debe ser .jpg, .png o .jpeg</p>
                   }
                 </div>
               }
@@ -53,6 +65,15 @@
                   @if (formCosmetico.get('type')?.errors?.['required']) {
                     <p>Type is required</p>
                   }
+                  @if (formCosmetico.get('type')?.errors?.['minlength']) {
+                    <p>Type minimun length is 4</p>
+                  }
+                  @if (formCosmetico.get('type')?.errors?.['notOnlyWhiteSpace']) {
+                    <p>Type can not be in white space</p>
+                  }
+                  @if(formCosmetico.get('type')?.errors?.['forbiddenName']){
+                    <p>Name can not be pito or polla</p>
+                }
                 </div>
               }
             </div>
@@ -70,6 +91,15 @@
                   @if (formCosmetico.get('brand')?.errors?.['required']) {
                     <p>Brand is required</p>
                   }
+                  @if (formCosmetico.get('brand')?.errors?.['minlength']) {
+                    <p>Brand minimun length is 4</p>
+                  }
+                  @if (formCosmetico.get('brand')?.errors?.['notOnlyWhiteSpace']) {
+                    <p>Brand can not be in white space</p>
+                  }
+                  @if(formCosmetico.get('brand')?.errors?.['forbiddenName']){
+                    <p>Name can not be pito or polla</p>
+                }
                 </div>
               }
             </div>
@@ -86,6 +116,9 @@
                 <div class="alert alert-danger">
                   @if (formCosmetico.get('price')?.errors?.['required']) {
                     <p>price is required</p>
+                  }
+                  @if (formCosmetico.get('price')?.errors?.['min']) {
+                    <p>price minimun is 1</p>
                   }
                 </div>
               }

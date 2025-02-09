@@ -2,6 +2,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CosmeticosService } from './../../services/cosmeticos.service';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormValidators } from '../../validators/FormsValidators';
 
 
 
@@ -25,12 +26,12 @@ export class CosmeticosEditComponent implements OnInit {
 
   formCosmetico: FormGroup = this.formBuilder.group({
     _id: ['', [Validators.required]],
-    name: ['', [Validators.required]],
-    image: ['', [Validators.required]],
-    type: ['', [Validators.required]],
-    brand: ['', [Validators.required]],
-    price: [0, [Validators.required]]
-  })
+    name: ['', [Validators.required, Validators.minLength(2), FormValidators.notOnlyWhiteSpace, FormValidators.forbiddenNameValidator(/pito|teta/i)]],
+    image: ['', [Validators.required, FormValidators.allowedData(/.jpg$|.png$|.jpeg$/)]],
+    type: ['', [Validators.required, Validators.minLength(4), FormValidators.notOnlyWhiteSpace, FormValidators.forbiddenNameValidator(/pito|teta/i)]],
+    brand: ['', [Validators.required, Validators.minLength(4), FormValidators.notOnlyWhiteSpace, FormValidators.forbiddenNameValidator(/pito|teta/i)]],
+    price: [0, [Validators.required, Validators.min(1)]]
+  });
 
 
   // GETERS del formulario:
